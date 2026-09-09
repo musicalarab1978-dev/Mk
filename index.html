@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Morgan — Self-Taught Developer</title>
+<meta name="description" content="Self-taught developer portfolio — web apps, mobile apps, and everything in between.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%92%A0</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/variables.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/sections.css">
+<link rel="stylesheet" href="assets/css/animations.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+
+<!--
+  Hidden admin panel: click the logo/name in the navbar 5 times within a
+  couple of seconds, then enter the code 2708. Both the click count and the
+  code live in data/config.json, not hardcoded here, so you can change them
+  in one place. See README.md before you deploy this.
+-->
+</head>
+<body>
+
+<div class="preloader" id="preloader"><div class="preloader-orb"></div></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="grain-overlay"></div>
+<canvas id="particles"></canvas>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="bg-blobs">
+  <div class="blob-drift blob1-drift"><div class="blob blob1"></div></div>
+  <div class="blob-drift blob2-drift"><div class="blob blob2"></div></div>
+  <div class="blob-drift blob3-drift"><div class="blob blob3"></div></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar glass">
+  <span class="logo" id="logo" role="button" tabindex="0" aria-label="Logo, scrolls to top">AM<span class="dot">.</span></span>
+  <ul class="nav-links">
+    <li><a href="#home" class="nav-link active">Home</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#projects" class="nav-link">Work</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="icon-btn" id="themeToggle" aria-label="Toggle light and dark theme"><i class="fa-solid fa-moon"></i></button>
+    <button class="icon-btn mobile-only" id="menuToggle" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+<div class="mobile-menu glass" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Work</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap hero-inner">
+    <p class="hero-availability hero-reveal"><span class="pulse-dot"></span><span id="heroAvailability"></span></p>
+    <p class="hero-greeting hero-reveal" id="heroGreeting"></p>
+    <h1 class="hero-name hero-reveal" id="heroName"></h1>
+    <h2 class="hero-role hero-reveal">I'm a <span id="typedRole"></span><span class="cursor-blink">|</span></h2>
+    <p class="hero-subtitle hero-reveal" id="heroSubtitle"></p>
+    <div class="hero-buttons hero-reveal">
+      <a href="#projects" class="btn btn-primary btn-hero-cta">View my work</a>
+      <a href="#contact" class="btn">Get in touch</a>
+    </div>
+    <div class="hero-socials hero-reveal" id="heroSocials"></div>
+  </div>
+  <div class="scroll-cue"><i class="fa-solid fa-chevron-down"></i></div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-grid" data-stagger>
+      <div class="avatar-wrap">
+        <div class="avatar-circle"><span id="avatarInitials"></span></div>
+      </div>
+      <div>
+        <h2>About</h2>
+        <p class="about-text" id="aboutText" style="margin-top:16px;"></p>
+        <div class="stats-row" id="statsRow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head reveal-up"><h2>Skills</h2></div>
+    <div class="skills-list glass" id="skillsList" data-stagger></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal-up">
+      <h2>Work</h2>
+      <p>A selection of recent web, mobile, and design projects.</p>
+    </div>
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="mobile">Mobile</button>
+      <button class="filter-btn" data-filter="design">Design</button>
+    </div>
+    <div class="projects-grid" id="projectsGrid" data-stagger></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal-up" style="margin-inline:auto; text-align:center;"><h2>What people say</h2></div>
+    <div class="testimonial-feature glass reveal-up">
+      <i class="fa-solid fa-quote-left" style="color:var(--ios-blue); font-size:1.3rem;"></i>
+      <p class="testimonial-quote" id="testimonialQuote" style="margin-top:18px;"></p>
+      <div class="testimonial-meta">
+        <span class="testimonial-avatar" id="testimonialAvatar"></span>
+        <div><strong id="testimonialName"></strong><span id="testimonialRole"></span></div>
+      </div>
+      <div class="testimonial-nav">
+        <button class="icon-btn" id="testiPrev" aria-label="Previous testimonial"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="testi-dots" id="testimonialDots"></div>
+        <button class="icon-btn" id="testiNext" aria-label="Next testimonial"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal-up"><h2>Get in touch</h2></div>
+    <div class="contact-grid" data-stagger>
+      <div class="contact-info glass" id="contactInfo"></div>
+      <form class="contact-form glass" id="contactForm">
+        <div class="form-group">
+          <input type="text" id="cName" placeholder=" " required>
+          <label for="cName">Your name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="cEmail" placeholder=" " required>
+          <label for="cEmail">Your email</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="cSubject" placeholder=" " required>
+          <label for="cSubject">Subject</label>
+        </div>
+        <div class="form-group">
+          <textarea id="cMessage" placeholder=" " required></textarea>
+          <label for="cMessage">Message</label>
+        </div>
+        <button type="submit" class="btn btn-primary full-width">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer glass">
+  <div class="wrap">
+    <p>&copy; <span id="year"></span> <span id="footerName"></span></p>
+    <div class="footer-socials" id="footerSocials"></div>
+  </div>
+</footer>
+<button class="icon-btn back-to-top glass" id="backToTop" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<div class="toast glass" id="toast"></div>
+
+<!-- SECRET ADMIN LOGIN -->
+<div class="modal-overlay" id="secretModalOverlay">
+  <div class="modal-box glass" id="secretModalBox" style="position:relative;">
+    <button class="icon-btn modal-close-x" id="closeSecretModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <i class="fa-solid fa-lock modal-icon"></i>
+    <h3>Restricted area</h3>
+    <p>Enter the access code to continue.</p>
+    <input type="password" id="secretCodeInput" maxlength="12" inputmode="numeric" placeholder="••••">
+    <button class="btn btn-primary full-width" id="submitCode">Unlock</button>
+    <p class="modal-error" id="codeError"></p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel glass">
+    <div class="admin-header">
+      <h2><i class="fa-solid fa-shield-halved"></i> Admin panel</h2>
+      <button class="icon-btn" id="closeAdminPanel" aria-label="Close admin panel"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="admin-tabs" id="adminTabs">
+      <button class="admin-tab active" data-tab="hero">Hero</button>
+      <button class="admin-tab" data-tab="about">About</button>
+      <button class="admin-tab" data-tab="skills">Skills</button>
+      <button class="admin-tab" data-tab="projects">Projects</button>
+      <button class="admin-tab" data-tab="contact">Contact</button>
+      <button class="admin-tab" data-tab="theme">Theme</button>
+      <button class="admin-tab" data-tab="data">Data</button>
+    </div>
+    <div class="admin-content" id="adminContent"></div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/animations.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/admin.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
