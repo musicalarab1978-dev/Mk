@@ -1,0 +1,67 @@
+/* ==========================================================================
+   admin.css — secret login modal + admin panel
+   ========================================================================== */
+
+.modal-overlay{
+  position:fixed; inset:0; z-index:4000; background:rgba(0,0,0,.6);
+  display:flex; align-items:center; justify-content:center; padding:20px;
+  opacity:0; pointer-events:none; transition:opacity .3s ease;
+}
+.modal-overlay.show{ opacity:1; pointer-events:all; }
+.modal-box{
+  width:min(360px,100%); border-radius:26px; padding:36px 32px; text-align:center;
+  transform:scale(.94); transition:transform .3s var(--ease);
+}
+.modal-overlay.show .modal-box{ transform:scale(1); }
+.modal-icon{ font-size:1.6rem; color:var(--ios-blue); margin-bottom:14px; }
+.modal-box h3{ margin-bottom:8px; }
+.modal-box p{ font-size:.9rem; margin-bottom:20px; }
+.modal-box input{
+  width:100%; padding:14px 16px; border-radius:14px; text-align:center; letter-spacing:.3em;
+  border:1px solid var(--glass-border); background:rgba(128,128,128,.08); margin-bottom:14px; font-size:1.1rem;
+}
+.modal-box input:focus{ outline:none; border-color:var(--ios-blue); }
+.modal-error{ color:var(--ios-pink); font-size:.82rem; min-height:18px; margin:10px 0 0; }
+.modal-close-x{ position:absolute; top:16px; right:16px; }
+
+.admin-overlay{
+  position:fixed; inset:0; z-index:4000; background:rgba(0,0,0,.55);
+  display:flex; justify-content:flex-end;
+  opacity:0; pointer-events:none; transition:opacity .35s ease;
+}
+.admin-overlay.show{ opacity:1; pointer-events:all; }
+.admin-panel{
+  width:min(460px,100%); height:100%; display:flex; flex-direction:column;
+  border-radius:0; transform:translateX(100%); transition:transform .45s var(--ease);
+}
+.admin-overlay.show .admin-panel{ transform:translateX(0); }
+.admin-header{ display:flex; align-items:center; justify-content:space-between; padding:22px 24px; border-bottom:1px solid var(--glass-border); }
+.admin-header h2{ font-size:1.1rem; display:flex; align-items:center; gap:10px; }
+.admin-tabs{ display:flex; flex-wrap:wrap; gap:8px; padding:16px 24px; border-bottom:1px solid var(--glass-border); }
+.admin-tab{
+  padding:8px 15px; border-radius:999px; border:1px solid var(--glass-border);
+  background:transparent; color:var(--text-2); font-size:.82rem; cursor:pointer; transition:all .2s ease;
+  display:flex; align-items:center; gap:6px;
+}
+.admin-tab.active{ background:var(--ios-blue); color:#fff; border-color:transparent; }
+.admin-content{ flex:1; overflow-y:auto; padding:24px; transition:opacity .12s ease; }
+.admin-field{ margin-bottom:20px; display:flex; flex-direction:column; gap:7px; }
+.admin-field label{ font-size:.78rem; color:var(--text-2); }
+.admin-field input,.admin-field textarea,.admin-field select{
+  padding:11px 14px; border-radius:12px; border:1px solid var(--glass-border);
+  background:rgba(128,128,128,.08); font-size:.92rem;
+}
+.admin-hint{ font-size:.78rem; color:var(--text-3); margin-top:14px; }
+.admin-hint code{ background:var(--glass-fill); padding:2px 6px; border-radius:6px; }
+.admin-list-item{
+  display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:14px;
+  border:1px solid var(--glass-border); border-radius:16px; margin-bottom:10px;
+}
+.admin-list-item input,.admin-list-item select,.admin-list-item textarea{ flex:1; min-width:90px; }
+.admin-list-item textarea{ min-height:44px; flex-basis:100%; }
+.range-value{ font-size:.82rem; color:var(--text-2); width:34px; }
+.color-row{ display:flex; gap:8px; }
+.color-row input{ flex:none; width:40px; height:34px; padding:2px; }
+.admin-toggle-row{ display:flex; gap:10px; }
+.admin-toggle-row .btn{ flex:1; padding:10px; font-size:.85rem; }
+.admin-note{ font-size:.82rem; line-height:1.6; margin-bottom:16px; }
