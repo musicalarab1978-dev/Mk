@@ -1,0 +1,44 @@
+/* ==========================================================================
+   variables.css — design tokens
+   Palette is Apple's own iOS system accent colors (systemBlue, systemPurple,
+   systemPink, systemGreen), which is what makes the glass read as "iOS"
+   rather than a generic purple gradient.
+   ========================================================================== */
+
+:root{
+  --void:#06070c;
+  --panel:#0b0d15;
+
+  --ios-blue:#0a84ff;
+  --ios-violet:#bf5af2;
+  --ios-pink:#ff375f;
+  --ios-green:#30d158;
+
+  --text-1:#f5f6fa;
+  --text-2:rgba(245,246,250,.62);
+  --text-3:rgba(245,246,250,.4);
+
+  --glass-fill:rgba(255,255,255,.06);
+  --glass-fill-strong:rgba(255,255,255,.1);
+  --glass-border:rgba(255,255,255,.12);
+  --shadow:0 8px 32px rgba(0,0,0,.32);
+  --blur-amount:28px;
+
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+@media (max-width:700px){
+  :root{ --blur-amount:14px; }
+}
+
+:root[data-theme="light"]{
+  --void:#eef0f5;
+  --panel:#ffffff;
+  --text-1:#0b0d14;
+  --text-2:rgba(11,13,20,.64);
+  --text-3:rgba(11,13,20,.42);
+  --glass-fill:rgba(255,255,255,.55);
+  --glass-fill-strong:rgba(255,255,255,.75);
+  --glass-border:rgba(0,0,0,.08);
+  --shadow:0 8px 32px rgba(0,0,0,.1);
+}

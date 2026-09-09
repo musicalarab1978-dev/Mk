@@ -1,0 +1,75 @@
+/* ==========================================================================
+   base.css — reset, typography, and shared utility classes
+   ========================================================================== */
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:110px; }
+img,svg{ display:block; max-width:100%; }
+button,input,textarea,select{ font:inherit; color:inherit; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+
+body{
+  background:var(--void);
+  color:var(--text-1);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+  transition:background .5s var(--ease), color .5s var(--ease);
+}
+::selection{ background:var(--ios-blue); color:#fff; }
+:focus-visible{ outline:2px solid var(--ios-blue); outline-offset:3px; border-radius:4px; }
+::-webkit-scrollbar{ width:10px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--glass-border); border-radius:10px; }
+
+h1,h2,h3{ font-weight:800; letter-spacing:-.03em; line-height:1.1; }
+h2{ font-size:clamp(2rem,4vw,2.9rem); letter-spacing:-.02em; }
+h3{ font-size:1.3rem; letter-spacing:-.01em; }
+p{ color:var(--text-2); }
+
+/* ---------- layout utilities ---------- */
+.wrap{ max-width:1180px; margin-inline:auto; padding-inline:clamp(24px,5vw,72px); }
+.section{ padding-block:120px; position:relative; }
+@media (max-width:720px){ .section{ padding-block:76px; } }
+.section-head{ max-width:640px; margin-bottom:56px; }
+.section-head p{ margin-top:12px; max-width:56ch; }
+
+/* ---------- glass material ---------- */
+.glass{
+  background:var(--glass-fill);
+  backdrop-filter:blur(var(--blur-amount)) saturate(160%);
+  -webkit-backdrop-filter:blur(var(--blur-amount)) saturate(160%);
+  border:1px solid var(--glass-border);
+  box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.08);
+  transition:background .4s var(--ease), border-color .4s var(--ease);
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:14px 28px; border-radius:999px; position:relative; overflow:hidden;
+  border:1px solid var(--glass-border);
+  background:var(--glass-fill);
+  backdrop-filter:blur(20px);
+  font-weight:600; font-size:.95rem; cursor:pointer;
+  transition:transform .3s var(--ease), background .3s var(--ease), box-shadow .3s var(--ease);
+}
+.btn:hover{ transform:translateY(-2px); background:var(--glass-fill-strong); }
+.btn-primary{
+  background:linear-gradient(135deg,var(--ios-blue),#3a9dff);
+  border-color:transparent; color:#fff;
+  box-shadow:0 8px 24px rgba(10,132,255,.35);
+}
+.btn-primary:hover{ box-shadow:0 10px 30px rgba(10,132,255,.5); }
+.btn.full-width{ width:100%; justify-content:center; }
+.btn:disabled{ opacity:.6; cursor:default; transform:none; }
+
+.icon-btn{
+  width:42px; height:42px; border-radius:50%; position:relative; overflow:hidden;
+  display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid var(--glass-border); background:var(--glass-fill);
+  cursor:pointer; transition:background .3s var(--ease), transform .3s var(--ease);
+  flex-shrink:0;
+}
+.icon-btn:hover{ background:var(--glass-fill-strong); transform:translateY(-1px); }
